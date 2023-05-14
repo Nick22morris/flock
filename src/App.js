@@ -6,6 +6,11 @@ import Login from "./pages/Login";
 function App() {
   return (
     <Router>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/createpost">Create Post</Link>
+        <Link to="/login">Login in</Link>
+      </nav>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/createpost" element={<CreatePost />} />
