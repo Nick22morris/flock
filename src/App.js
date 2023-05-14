@@ -1,27 +1,18 @@
 import "./App.css";
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAS2yYSdhYpdQ6fTn6d4vGqYkmAzOBTnFQ",
-  authDomain: "flock-99a84.firebaseapp.com",
-  projectId: "flock-99a84",
-  storageBucket: "flock-99a84.appspot.com",
-  messagingSenderId: "422645667697",
-  appId: "1:422645667697:web:4147bba3e732fa2f7388d0",
-  measurementId: "G-H1GN2XYYDW",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import CreatePost from "./pages/CreatePost";
+import Login from "./pages/Login";
 function App() {
-  return <div className="App"></div>;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/createpost" element={<CreatePost />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
