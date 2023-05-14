@@ -1,0 +1,19 @@
+{
+  "functions": {
+    "source": "functions"
+  },
+  "hosting": {
+    "public": "nick22morris/flock",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
