@@ -1,19 +1,16 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+const functions = require("firebase-functions");
+const express = require("express");
+const path = require("path");
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+const app = express();
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+// Serve static files from the "build" directory
+app.use(express.static(path.join(__dirname, "..", "src")));
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+// Serve the index.html file for all routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "src", "index.html"));
+});
+
+// Export the Express app as a Firebase Cloud Function
+exports.app = functions.https.onRequest(app);
