@@ -1,91 +1,4 @@
-.App {
-  text-align: center;
-}
-body {
-  padding: 0%;
-  margin: 0%;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-nav {
-  margin: 0;
-  width: 100%;
-  height: 80px;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-decoration: none;
-}
-
-a {
-  color: white;
-  text-decoration: none;
-  margin: 10px;
-  font-size: 25px;
-}
-
-.createPostPage {
-  width: 100%;
-  height: calc(100vh - 80px);
-  display: grid;
-  place-items: center;
-}
-
-.cpContainer {
-  width: 500px;
-  height: auto;
-  padding: 20px;
-  background-color: black;
-  border-radius: 12px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.cpContainer h1 {
-  text-align: center;
-}
-
-.cpContainer label {
-  font-size: 25px;
-}
-.cpContainer .inputGp {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-}
-
-.inputGp input,
-.inputGp textarea {
-  font-size: 18px;
-  border: none;
-  border-radius: 2px;
-  padding: 5px;
-}
-
-.inputGp input {
-  height: 40px;
-}
-.inputGp textarea {
-  height: 150px;
-}
-
-.cpContainer button {
-  margin-top: 20px;
-  height: 40px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-}
-input,
-textarea {
-  margin-top: 5px;
-}
-
-.loginPage {
+/* .loginPage {
   width: 100vw;
   height: calc(100vh - 80px);
   display: flex;
@@ -96,7 +9,7 @@ textarea {
 
 .loginPage p {
   font-size: 30px;
-}
+} */
 
 /* GOOGLE BUTTOn */
 .login-with-google-btn {
@@ -134,56 +47,115 @@ textarea {
   cursor: not-allowed;
 }
 
-.homePage {
-  width: 100%;
-  min-height: calc(100vh - 80px);
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.homePage .post {
-  width: 600px;
-  height: auto;
-  max-height: 600px;
-  background-color: rgb(250, 250, 250);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: 20px;
+header {
+  background-color: #333;
+  color: #fff;
   padding: 20px;
-  border-radius: 15px;
+  text-align: center;
 }
 
-.post .postHeader {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.postHeader .title {
-  flex: 50%;
-}
-.postHeader .deletePost {
-  flex: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+nav ul li {
+  display: inline-block;
+  margin-right: 10px;
 }
 
-.deletePost button {
-  border: none;
-
-  background: none;
-  font-size: 30px;
-  cursor: pointer;
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
 }
 
-.post .postTextContainer {
-  word-wrap: break-word;
-  height: auto;
-  max-height: 400px;
-  width: 100%;
-  overflow: hidden;
-  overflow-y: auto;
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+article {
+  margin-bottom: 40px;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-top: 0;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.featured {
+  background-color: #f2f2f2;
+  width: 50%;
+  margin-top: 50px;
+}
+
+.featured h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.featured p {
+  color: #666;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.featured a {
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+article:not(.featured) {
+  text-align: left;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 50%;
+}
+
+article:not(.featured) h2 {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+article:not(.featured) p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+article:not(.featured) a {
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+
+.title {
+  color: white;
+  text-decoration: none;
 }

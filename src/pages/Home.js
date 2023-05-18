@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
-import { postsCollectionRef } from "firebase/firestore";
-
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 function Home({ isAuth }) {
-  const [postLists, setPostList] = useState([]);
+  const [latestPost, setLatestPost] = useState(null);
+  const [allPosts, setAllPosts] = useState([]);
   const postsCollectionRef = collection(db, "posts");
 
   const deletePost = async (id) => {
@@ -15,38 +15,33 @@ function Home({ isAuth }) {
   useEffect(() => {
     const getPosts = async () => {
       const data = await getDocs(postsCollectionRef);
-      setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      const posts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setLatestPost(posts[0]);
+      setAllPosts(posts);
     };
 
     getPosts();
-  }, [deletePost]);
+  }, []);
 
   return (
     <div className="homePage">
-      {postLists.map((post) => {
-        return (
-          <div className="post">
-            <div className="postHeader">
-              <div className="title">
-                <h1> {post.title}</h1>
-              </div>
-              <div className="deletePost">
-                {isAuth && post.author.id === auth.currentUser.uid && (
-                  <button
-                    onClick={() => {
-                      deletePost(post.id);
-                    }}
-                  >
-                    {" "}
-                    &#128465;
-                  </button>
-                )}
-              </div>
-            </div>
-            <div className="postTextContainer"> {post.postText} </div>
-          </div>
-        );
-      })}
+      <center>
+        <article className="featured">
+          <h2>Latest - {latestPost ? latestPost.title : "Loading..."}</h2>
+          <p>{latestPost ? latestPost.postText.substring(0, 400) : "Loading"}...</p>
+          <Link to="/">Read More</Link>
+        </article>
+
+        {allPosts.slice(1).map((post) => {
+          return (
+            <article>
+              <h2>{post.title ? post.title : "Loading..."}</h2>
+              <p>{post.postText ? post.postText.substring(0, 400) : "Loading"}...</p>
+              <Link to="/">Read More</Link>
+            </article>
+          );
+        })}
+      </center>
     </div>
   );
 }
