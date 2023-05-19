@@ -65,14 +65,6 @@ function Home({ isAuth }) {
           </article>
         );
       })}
-
-      <div className="pagination">
-        {Array.from({ length: Math.ceil(allPosts.length / postsPerPage) }).map((_, index) => (
-          <button key={index} onClick={() => paginate(index + 1)}>
-            {index + 1}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
