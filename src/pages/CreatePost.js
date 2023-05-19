@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
-
 function CreatePost({ isAuth }) {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
-
   const postsCollectionRef = collection(db, "posts");
   let navigate = useNavigate();
 
@@ -15,6 +13,7 @@ function CreatePost({ isAuth }) {
       title,
       postText,
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
+      timeStamp: Date.now(),
     });
     navigate("/");
   };

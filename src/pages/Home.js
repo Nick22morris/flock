@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getDocs, collection, deleteDoc, doc, getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getDocs, collection, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,9 @@ function Home({ isAuth }) {
   const [allPosts, setAllPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
-  const postsCollectionRef = collection(db, "posts");
+  var postsCollectionRef = collection(db, "posts");
+  const q = query(postsCollectionRef, orderBy("timeStamp"));
+  postsCollectionRef = q;
   let navigate = useNavigate();
 
   useEffect(() => {
