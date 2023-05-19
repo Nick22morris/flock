@@ -44,7 +44,9 @@ function Home({ isAuth }) {
     <div className="homePage">
       <article className="featured">
         <h2>Latest - {latestPost ? latestPost.title : "Loading..."}</h2>
-        <p>{latestPost ? latestPost.postText.substring(0, 400) : "Loading"}...</p>
+        <p>
+          <div dangerouslySetInnerHTML={{ __html: latestPost ? latestPost.postText.substring(0, 400) + "..." : "Loading" }} />
+        </p>
         <button className="button" onClick={() => goToPost(latestPost.title, latestPost.postText)}>
           Read More
         </button>
@@ -54,7 +56,9 @@ function Home({ isAuth }) {
         return (
           <article key={post.id}>
             <h2>{post.title ? post.title : "Loading..."}</h2>
-            <p>{post.postText ? post.postText.substring(0, 400) : "Loading"}...</p>
+            <p>
+              <div dangerouslySetInnerHTML={{ __html: post.postText ? post.postText.substring(0, 400) + "..." : "Loading" }} />
+            </p>
             <button className="button" onClick={() => goToPost(post.title, post.postText)}>
               Read More
             </button>

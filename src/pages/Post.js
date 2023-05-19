@@ -9,30 +9,18 @@ function Post(props) {
   //   return allPosts.find((element) => {
   //     return element.title === "Welcome";
   //   });
-  // }
-  const post = "Hello"; //findArrayElementByTitle();
+  // } //findArrayElementByTitle();
 
   function display() {
-    if (post) {
-      return (
-        <center>
-          <article className="selected">
-            <center>
-              <h1>{myPostTitle}</h1>
-            </center>
-            <p>{myPostBody}</p>
-          </article>
-        </center>
-      );
-    }
-    console.log(post);
     return (
       <center>
-        <article>
+        <article className="selected">
           <center>
-            <h1>Loading...</h1>
+            <h1>{myPostTitle}</h1>
           </center>
-          <p>Loading...</p>
+          <p>
+            <div dangerouslySetInnerHTML={{ __html: myPostBody }} />
+          </p>
         </article>
       </center>
     );
