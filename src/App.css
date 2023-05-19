@@ -109,7 +109,7 @@ p {
 
 .featured {
   background-color: #f2f2f2;
-  width: 50%;
+  width: 65%;
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
@@ -138,7 +138,7 @@ article:not(.featured) {
   text-align: left;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 50%;
+  width: 65%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -182,4 +182,64 @@ article:not(.featured) a {
 .title {
   color: white;
   text-decoration: none;
+}
+.createPostPage {
+  width: 100%;
+  height: calc(100vh - 80px);
+  display: grid;
+  place-items: center;
+}
+
+.cpContainer {
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 12px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.cpContainer h1 {
+  text-align: center;
+}
+
+.cpContainer label {
+  font-size: 25px;
+}
+.cpContainer .inputGp {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGp input,
+.inputGp textarea {
+  font-size: 18px;
+  border: none;
+  border-radius: 2px;
+  padding: 5px;
+}
+
+.inputGp input {
+  height: 40px;
+}
+.inputGp textarea {
+  height: 150px;
+}
+
+.cpContainer button {
+  margin-top: 20px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  background-color: #555;
+  color: white;
+}
+input,
+textarea {
+  margin-top: 5px;
 }

@@ -1,40 +1,26 @@
 import React from "react";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
-import { useState, useEffect } from "react";
-import { auth, db } from "../firebase-config";
-import { useNavigate } from "react-router-dom";
-function Post() {
-  const [latestPost, setLatestPost] = useState(null);
-  const [allPosts, setAllPosts] = useState([]);
-  const postsCollectionRef = collection(db, "posts");
+function Post(props) {
+  const myPostTitle = localStorage.getItem("clickedTitle");
+  const myPostBody = localStorage.getItem("clickedBody");
+  console.log("post:" + myPostTitle);
+  console.log("post:" + myPostBody);
 
-  useEffect(() => {
-    const getPosts = async () => {
-      const data = await getDocs(postsCollectionRef);
-      const posts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      setLatestPost(posts[0]);
-      setAllPosts(posts);
-    };
-
-    getPosts();
-  }, []);
-
-  function findArrayElementByTitle() {
-    return allPosts.find((element) => {
-      return element.title === "Welcome";
-    });
-  }
-  const post = findArrayElementByTitle();
+  // function findArrayElementByTitle() {
+  //   return allPosts.find((element) => {
+  //     return element.title === "Welcome";
+  //   });
+  // }
+  const post = "Hello"; //findArrayElementByTitle();
 
   function display() {
     if (post) {
       return (
         <center>
-          <article>
+          <article className="selected">
             <center>
-              <h1>{post.title}</h1>
+              <h1>{myPostTitle}</h1>
             </center>
-            <p>{post.postText}</p>
+            <p>{myPostBody}</p>
           </article>
         </center>
       );

@@ -1,48 +1,72 @@
 import React, { useEffect, useState } from "react";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
-import { auth, db } from "../firebase-config";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { getDocs, collection, deleteDoc, doc, getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { db } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
+
 function Home({ isAuth }) {
   const [latestPost, setLatestPost] = useState(null);
   const [allPosts, setAllPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
   const postsCollectionRef = collection(db, "posts");
-  const [clickedPost, setClickedPost] = useState(localStorage.getItem("clicked"));
   let navigate = useNavigate();
+
   useEffect(() => {
     const getPosts = async () => {
+      console.log("attempt");
       const data = await getDocs(postsCollectionRef);
       const posts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       setLatestPost(posts[0]);
       setAllPosts(posts);
+      console.log("Run!");
     };
 
     getPosts();
   }, []);
-  function goToPost(title) {
-    setClickedPost(title);
-    console.log("Run");
-    // navigate("/post");
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = allPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  function paginate(pageNumber) {
+    setCurrentPage(pageNumber);
   }
+
+  function goToPost(title, body) {
+    localStorage.setItem("clickedTitle", title);
+    localStorage.setItem("clickedBody", body);
+    navigate("/post");
+  }
+
   return (
     <div className="homePage">
       <article className="featured">
         <h2>Latest - {latestPost ? latestPost.title : "Loading..."}</h2>
         <p>{latestPost ? latestPost.postText.substring(0, 400) : "Loading"}...</p>
-        <button className="button" onClick={() => this.goToPost(latestPost.title)}>
+        <button className="button" onClick={() => goToPost(latestPost.title, latestPost.postText)}>
           Read More
         </button>
       </article>
 
-      {allPosts.slice(1).map((post) => {
+      {currentPosts.slice(1).map((post) => {
         return (
-          <article>
+          <article key={post.id}>
             <h2>{post.title ? post.title : "Loading..."}</h2>
             <p>{post.postText ? post.postText.substring(0, 400) : "Loading"}...</p>
-            <button className="button">Read More</button>
+            <button className="button" onClick={() => goToPost(post.title, post.postText)}>
+              Read More
+            </button>
           </article>
         );
       })}
+
+      <div className="pagination">
+        {Array.from({ length: Math.ceil(allPosts.length / postsPerPage) }).map((_, index) => (
+          <button key={index} onClick={() => paginate(index + 1)}>
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
