@@ -28,7 +28,7 @@ function App() {
               <div>
                 <li>
                   <Link to="/" className="title">
-                    The Flock Letters
+                    <h1>The Flock Letters</h1>
                   </Link>
                 </li>
               </div>
@@ -55,7 +55,7 @@ function App() {
         <Route path="/" element={<Home isAuth={isAuth} />} />
         <Route path="/createpost" element={<CreatePost isAuth={isAuth} />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
-        <Route path="/post" element={<Post post={"Welcome"} />} />
+        <Route path="/post" element={<Post />} />
       </Routes>
     </Router>
   );
